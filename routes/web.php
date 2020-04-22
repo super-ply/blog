@@ -18,5 +18,6 @@
 //用户添加路由
 Route::get('user/add','UserController@add');
 Route::post('user/store','UserController@store');
-
-
+Route::get('user/index','UserController@index');
+Route::get('user/edit/{id}','UserController@edit');
+Route::post('user/update','UserController@update');
