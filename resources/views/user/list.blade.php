@@ -10,28 +10,52 @@
       http-equiv="X-UA-Compatible"
       content="ie=edge"
     />
-    <link rel="stylesheet" href="style.css" />
     <title>Static Template</title>
+    <script src="{{ URL::asset('/') }}js/jquery.js"></script>
+    <script src="{{ URL::asset('/') }}js/layer/layer.js"></script>
   </head>
   <body>
-        <table>
-        <tr>
-            <td>ID</td>
-            <td>用户名</td>
-            <td>密码</td>
-            <td>操作</td>
-        </tr>
-        @foreach($user as $v)
-        <tr>
-            <td>{{$v->id}}</td>
-            <td>{{$v->username}}</td>
-            <td>{{$v->password}}</td>
-            <td><a href='/user/edit/{{$v->id}}'>修改</a>|<a href=''>删除</a></td>
-        </tr>
-        @endforeach
-        <tr>
-            <td><input type="submit" value="提交"></td>
-        </tr>
-        </table>
+      <table>
+      <tr>
+          <td>ID</td>
+          <td>用户名</td>
+          <td>密码</td>
+          <td>操作</td>
+      </tr>
+      @foreach($user as $v)
+      <tr>
+          <td>{{$v->id}}</td>
+          <td>{{$v->username}}</td>
+          <td>{{$v->password}}</td>
+          <td><a href='/user/edit/{{$v->id}}'>修改</a>|<a href='javascript:' onclick="del_member(this,{{$v->id}})">删除</a></td>
+      </tr>
+      @endforeach
+      <tr>
+          <td><input type="submit" value="提交"></td>
+      </tr>
+      </table>
+
+      <script>
+        function del_member(obj,id){
+          layer.confirm('是否确认删除？', {
+              btn: ['是','否'] //按钮
+            }, function(){
+              $.get('/user/del/'+id,function(data){
+                //console.log(data);
+                if(data.status == 0){
+                  $(obj).parents('tr').remove();
+                  layer.msg(data.message,{icon:6});
+                }else{
+                  layer.msg(data.message,{icon:5});
+                }
+                
+              });
+        },function(){
+
+        });
+      }
+      </script>
+
+
   </body>
 </html>
