@@ -11,10 +11,10 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-//用户添加路由
 Route::get('admin/login','Admin\LoginController@login');
-//Route::get('','UserController@index');
+Route::post('admin/dologin','Admin\LoginController@dologin');
+Route::any('admin/create','Admin\CaptchaController@create');
