@@ -22,13 +22,19 @@ class Captcha {
         //echo dirname(__FILE__);die;
         $this->font = public_path().'./Arial.ttf';//注意字体路径要写对，否则显示不了图片
     }
+
+    // public function get(){
+    //     return $_SESSION['code'];
+    //     return session('code');
+    // }
+
     //生成随机码
     private function createCode() {
         $_len = strlen($this->charset)-1;
         for ($i=0;$i<$this->codelen;$i++) {
             $this->code .= $this->charset[mt_rand(0,$_len)];
         }
-
+        //Session::put('code',$this->code);
         return $this->code;
     }
     //生成背景

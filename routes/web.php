@@ -16,5 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('admin/login','Admin\LoginController@login');
-Route::post('admin/dologin','Admin\LoginController@dologin');
+Route::get('admin/index','Admin\LoginController@index');
+Route::any('admin/dologin','Admin\LoginController@dologin');
 Route::any('admin/create','Admin\CaptchaController@create');
+Route::get('admin/jiami','Admin\LoginController@jiami');

@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="stylesheet" href="{{asset('X-admin/css/font.css')}}">
-    <link rel="stylesheet" href="{{asset('X-admin/css/login.css')}}">
-	  <link rel="stylesheet" href="{{asset('X-admin/css/xadmin.css')}}">
+    <link rel="stylesheet" href="{{asset('x-admin/css/font.css')}}">
+    <link rel="stylesheet" href="{{asset('x-admin/css/login.css')}}">
+	  <link rel="stylesheet" href="{{asset('x-admin/css/xadmin.css')}}">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="{{asset('X-admin/lib/layui/layui.js')}}" charset="utf-8"></script>
     <!--[if lt IE 9]>
@@ -21,6 +21,20 @@
     
     <div class="login layui-anim layui-anim-up">
         <div class="message">后台管理登录</div>
+        @if (count((array)$errors) > 0)
+          <div class="alert alert-danger">
+            <ul>
+                @if(is_object($errors))
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+                @else
+                  <li>{{$errors}}</li>
+                @endif
+            </ul>
+          </div>
+        @endif
+
         <div id="darkbannerwrap"></div>
         
         <form method="post" class="layui-form" action="{{url('admin/dologin')}}">
@@ -28,9 +42,8 @@
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
-            <input name="verifycode" lay-verify="required" placeholder="请输入验证码"  type="text" class="layui-input">
-            <hr class="hr15">
-            <img src="{{url('/admin/create')}}" alt="" id="img">
+            <input name="verifycode" style='width:150px;float:left' lay-verify="required" placeholder="请输入验证码"  type="text" class="layui-input">
+            <img src="{{url('/admin/create')}}" alt="" style="width:150px;float:right;height:50px" id="img">
             <hr class="hr15">
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
@@ -55,10 +68,10 @@
             });
         })
     </script> -->
-    <!-- 底部结束 -->
+  
     <script>
     $("#img").click(function(){
-                $(this).attr('src',"{{url('/verify/create')}}"+"?"+Math.random())
+                $(this).attr('src',"{{url('/admin/create')}}"+"?"+Math.random())
             })
     </script>
     <script>
